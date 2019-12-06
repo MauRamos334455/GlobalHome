@@ -1,6 +1,10 @@
---@Autor(es): <Nombre de los integrantes>
---@Fecha creación: dd/mm/aaaa
---@Descripción: <breve descripción del contenido y propósito del archivo>
+--@Autor(es): Carolina Kennedy Villa
+--            Ricardo Garcia Garcia
+--           César Mauricio Ramos Villaseñor
+--@Fecha creación: 06/12/2019
+--@Descripción: Creación y asignación de 
+--privilegios a los usuarios de la base de
+--datos para el proyecto GlobalHome.
 
 prompt INGRESANDO COMO SYSDBA...
 connect sys as sysdba
@@ -24,7 +28,7 @@ grant create table, create sequence,
 create role rol_invitado;
 grant create session to kgr_proy_invitado;
 
-prompt ASIGNANDO ROLES..
+prompt ASIGNANDO ROLES...
 grant rol_admin to kgr_proy_admin;
 grant rol_invitado to kgr_proy_invitado;
 
