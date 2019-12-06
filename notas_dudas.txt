@@ -1,6 +1,3 @@
 --¿Es posible registrar una vivienda sin imagenes?
---¿Las clabes son distintas opciones por vivienda?
---Tipo de relacion entre mensaje y usuario, 
-    como sabemos quien es el remitente y quien el destinatario
 --¿Asociar tarjeta de credito del alquiler con el cliente o con el alquiler?
 
