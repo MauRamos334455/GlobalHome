@@ -16,7 +16,8 @@ create table usuario(
     nombre varchar2 (40) not null,
     apellido_paterno varchar2(40) not null,
     apellido_materno varchar2(40),
-    contrasenia varchar2(15) not null
+    contrasenia varchar2(15) not null,
+
 
 
 );
@@ -33,7 +34,12 @@ create table vivienda(
     fecha_status date not null,
     es_renta number(1,0) not null,
     es_vacacion number(1,0) not null,
-    es_venta number(1,0) not null
+    es_venta number(1,0) not null,
+    status_vivienda_id number(10,0) not null,
+    constraint vs_vivienda_id_fk
+      foreign key (status_vivienda_id)
+      references status_vivienda(status_vivienda_id),
+
 );
 
 prompt TABLA VIVIENDA_RENTA
@@ -42,7 +48,9 @@ create table vivienda_renta(
       constraint vivienda_renta_pk primary key,
     renta_mensual number(20,2) not null,
     dia_deposito number(2,0) not null
-
+    constraint vr_vivienda_id_fk
+      foreign key (vivienda_id)
+      references vivienda(vivienda_id),
 );
 
 prompt TABLA VIVIENDA_VENTA
