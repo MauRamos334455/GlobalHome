@@ -1,7 +1,7 @@
 --@Autores:
     --García García Ricardo
-    --Ramos Villaseñor César Mauricio
     --Kennedy Villa Carolina
+    --Ramos Villaseñor César Mauricio
 --@Fecha creación: 07/12/2019
 --@Descripción: Creación de indices
 

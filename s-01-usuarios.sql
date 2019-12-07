@@ -2,7 +2,7 @@
 --            Ricardo Garcia Garcia
 --           César Mauricio Ramos Villaseñor
 --@Fecha creación: 06/12/2019
---@Descripción: Creación y asignación de 
+--@Descripción: Creación y asignación de
 --privilegios a los usuarios de la base de
 --datos para el proyecto GlobalHome.
 
@@ -20,10 +20,11 @@ quota 1024m on users;
 
 prompt CREANDO ROLES...
 create role rol_admin;
-grant create table, create sequence, 
+grant create table, create sequence,
       create session, create procedure,
       create synonym, create index,
       create view, create public synonym,
+      create any synonym,
       create trigger to kgr_proy_admin;
 create role rol_invitado;
 grant create session to kgr_proy_invitado;
