@@ -9,7 +9,7 @@ connect kgr_proy_admin;
 
 prompt TABLA USUARIOS
 create table usuario(
-    usuario_id number(10,0) default seq.nextval
+    usuario_id number(10,0) default usuario_seq.nextval
       constraint usuario_pk primary key,
     email varchar2(40) not null,
     nombre_usuario varchar2(40) not null,
@@ -24,7 +24,7 @@ create table usuario(
 
 prompt TABLA VIVIENDA
 create table vivienda(
-    vivienda_id number(10,0) default seq.nextval
+    vivienda_id number(10,0) default vivienda_seq.nextval
       constraint vivienda_pk primary key,
     longitud varchar2(40) not null,
     latitud varchar2(40) not null,
@@ -69,6 +69,8 @@ create table vivienda_venta(
     constraint vven_vivienda_id_fk
       foreign key (vivienda_id)
       references vivienda(vivienda_id),
+    constraint vv_folio_uk unique (folio),
+    constraint vv_numero_catastral_uk unique(numero_catastral)
 );
 
 prompt TABLA VIVIENDA_VACACION
@@ -88,7 +90,7 @@ create table vivienda_vacacion(
 
 prompt TABLA CONTRATO
 create table contrato(
-    contrato_id number(10,0) default seq.nextval
+    contrato_id number(10,0) default contrato_seq.nextval
       constraint contrato_pk primary key,
     folio varchar2(30) not null,
     fecha_contrato date not null,
@@ -101,12 +103,12 @@ create table contrato(
     constraint contrato_usuario_id_fk
       foreign key (usuario_id)
       references usuario(usuario_id),
-      constraint contrato_folio_uk unique (folio)
+    constraint contrato_folio_uk unique (folio)
 );
 
 prompt TABLA ALQUILER
 create table alquiler(
-    alquiler_id number(10,0) default seq.nextval,
+    alquiler_id number(10,0) default alquiler_seq.nextval,
       constraint alquiler_pk primary key,
     folio varchar2(20) not null,
     usuario_id number(10,0) not null,
@@ -123,7 +125,7 @@ create table alquiler(
 prompt TABLA IMAGEN
 create table imagen(
     vivienda_id number(10,0)
-    numero number(2,0) default seq.nextval,
+    numero number(2,0) default imagen_seq.nextval,
     contenido blob not null,
     constraint imagen_pk
       primary key (vivienda_id, numero),
@@ -134,7 +136,7 @@ create table imagen(
 
 prompt TABLA CLABE
 create table  clabe(
-    clabe_id number(10,0) default seq.nextval
+    clabe_id number(10,0) default clabe_seq.nextval
       constraint clabe_pk primary key,
     clabe number(18,0) not null,
     vivienda_id number(10,0) not null,
@@ -145,7 +147,7 @@ create table  clabe(
 
 prompt TABLA NOTIFICACION
 create table notificacion(
-    notificacion_id number(10,0) default seq.nextval
+    notificacion_id number(10,0) default notificacion_seq.nextval
       constraint notificacion_pk primary key,
     numero_celular number(15,0) not null,
     enviado number(1,0) not null,
@@ -162,7 +164,7 @@ create table notificacion(
 
 prompt TABLA MENSAJE
 create table mensaje(
-    mensaje_id number(10,0) default seq.nextval
+    mensaje_id number(10,0) default mensaje_seq.nextval
       constraint mensaje_pk primary key,
     contenido varchar2(2000) not null,
     visto number(1,0) not null,
@@ -183,7 +185,7 @@ create table mensaje(
 
 prompt TABLA TARJETA_CREDITO
 create table tarjeta_credito(
-    tarjeta_credito_id number(10,0) default seq.nextval
+    tarjeta_credito_id number(10,0) default tarjeta_credito_seq.nextval
       constraint tarjeta_credito_pk primary key,
     numero_tarjeta number(16,0) not null,
     mes_expiracion number(2,0) not null,
@@ -199,7 +201,7 @@ create table tarjeta_credito(
 
 prompt TABLA TRANSACCION
 create table transaccion (
-    transaccion_id number(10,0) default seq.nextval
+    transaccion_id number(10,0) default transaccion_seq.nextval
       constraint transaccion_pk primary key,
     comision number(24,4) not null,
     clave_interbancaria number(18,0) not null,
@@ -216,16 +218,17 @@ create table transaccion (
 
 prompt TABLA SERVICIO
 create table servicio(
-    servicio_id number(10,0) default seq.nextval
+    servicio_id number(10,0) default servicio_seq.nextval
      constraint servicio_pk primary key,
     nombre varchar2(100) not null,
     descripcion varchar2(2000) not null,
-    icono blob not null
+    icono blob not null,
+    constraint servicio_nombre_uk unique(nombre)
 );
 
 prompt TABLA VIVIENDA_SERVICIO
 create table vivienda_servicio(
-    vivienda_servicio_id number(10,0) default seq.nextval
+    vivienda_servicio_id number(10,0) default vivienda_servicio_seq.nextval
       constraint vivienda_servicio_pk primary key,
     servicio_id number(10,0) not null,
     vivienda_id number(10,0) not null,
@@ -239,7 +242,7 @@ create table vivienda_servicio(
 
 prompt TABLA STATUS_VIVIENDA
 create table status_vivienda(
-    status_vivienda_id number(10,0) default seq.nextval
+    status_vivienda_id number(10,0) default status_vivienda_seq.nextval
       constraint status_vivienda_pk primary key,
     clave varchar2(30) not null,
     descripcion varchar2(2000) not null
@@ -250,7 +253,7 @@ create table status_vivienda(
 
 prompt TABLA HISTORICO_VIVIENDA
 create table historico_vivienda(
-    historico_vivienda_id number(10,0) default seq.nextval
+    historico_vivienda_id number(10,0) default historico_vivienda_seq.nextval
       constraint historico_vivienda_pk primary key,
     fecha_status date not null
     vivienda_id number(10,0) not null,
@@ -266,7 +269,7 @@ create table historico_vivienda(
 prompt TABLA MENSUALIDAD
 create table mensualidad(
     transaccion_id number(10,0),
-    numero_pago number(2,0) default seq.nextval,
+    numero_pago number(2,0) default mensualidad_seq.nextval,
     fecha_pago date default sysdate not null,
     importe number(24,4) not null,
     evidencia blob not null,
