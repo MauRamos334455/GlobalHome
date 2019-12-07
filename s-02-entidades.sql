@@ -9,7 +9,7 @@ connect kgr_proy_admin;
 
 prompt TABLA USUARIOS
 create table usuario(
-    usuario_id number(10,0)
+    usuario_id number(10,0) default seq.nextval
       constraint usuario_pk primary key,
     email varchar2(40) not null,
     nombre_usuario varchar2(40) not null,
@@ -17,19 +17,21 @@ create table usuario(
     apellido_paterno varchar2(40) not null,
     apellido_materno varchar2(40),
     contrasenia varchar2(15) not null,
-
+    constraint usuario_email_uk unique (email),
+    constraint usuario_nombre_usuario_uk unique(nombre_usuario),
+    constraint usuario_contrasenia_chk check(LENGTH(contrasenia)>=8)
 );
 
 prompt TABLA VIVIENDA
 create table vivienda(
-    vivienda_id number(10,0)
+    vivienda_id number(10,0) default seq.nextval
       constraint vivienda_pk primary key,
     longitud varchar2(40) not null,
     latitud varchar2(40) not null,
     direccion varchar2(100) not null,
     capacidad number(4,0) not null,
     descripcion varchar2(2000) not null,
-    fecha_status date not null,
+    fecha_status date default sysdate not null,
     es_renta number(1,0) not null,
     es_vacacion number(1,0) not null,
     es_venta number(1,0) not null,
@@ -37,7 +39,9 @@ create table vivienda(
     constraint vs_vivienda_id_fk
       foreign key (status_vivienda_id)
       references status_vivienda(status_vivienda_id),
-
+    constraint vivienda_es_renta_es_vacacion_es_venta_chk check (
+      ((es_renta = 1 or es_vacacion = 1) and es_venta = 0) or
+       (es_venta = 1 and es_renta = 0 and es_vacacion = 0))
 );
 
 prompt TABLA VIVIENDA_RENTA
@@ -45,10 +49,13 @@ create table vivienda_renta(
     vivienda_id number(10, 0)
       constraint vivienda_renta_pk primary key,
     renta_mensual number(20,2) not null,
-    dia_deposito number(2,0) not null
+    dia_deposito number(2,0) not null,
     constraint vr_vivienda_id_fk
       foreign key (vivienda_id)
       references vivienda(vivienda_id),
+    constraint vr_dia_deposito_chk check (
+      dia_deposito > 0 and dia_deposito <=31),
+    constraint vr_renta_mensual_chk check(renta_mensual>0)
 );
 
 prompt TABLA VIVIENDA_VENTA
@@ -75,11 +82,13 @@ create table vivienda_vacacion(
     constraint vvac_vivienda_id_fk
       foreign key (vivienda_id)
       references vivienda(vivienda_id),
+    constraint vvac_precio_dia_chk check (precio_dia >0),
+    constraint vvac_fecha_inicio_fecha_fin_chk check((fecha_fin-fecha_inicio)>0)
 );
 
 prompt TABLA CONTRATO
 create table contrato(
-    contrato_id number(10,0)
+    contrato_id number(10,0) default seq.nextval
       constraint contrato_pk primary key,
     folio varchar2(30) not null,
     fecha_contrato date not null,
@@ -92,11 +101,12 @@ create table contrato(
     constraint contrato_usuario_id_fk
       foreign key (usuario_id)
       references usuario(usuario_id),
+      constraint contrato_folio_uk unique (folio)
 );
 
 prompt TABLA ALQUILER
 create table alquiler(
-    alquiler_id number(10,0)
+    alquiler_id number(10,0) default seq.nextval,
       constraint alquiler_pk primary key,
     folio varchar2(20) not null,
     usuario_id number(10,0) not null,
@@ -107,13 +117,13 @@ create table alquiler(
     constraint alquiler_vivienda_id_fk
       foreign key (vivienda_id)
       references vivienda(vivienda_id),
-
+    constraint alquiler_folio_uk unique (folio)
 );
 
 prompt TABLA IMAGEN
 create table imagen(
     vivienda_id number(10,0)
-    numero number(2,0),
+    numero number(2,0) default seq.nextval,
     contenido blob not null,
     constraint imagen_pk
       primary key (vivienda_id, numero),
@@ -124,7 +134,7 @@ create table imagen(
 
 prompt TABLA CLABE
 create table  clabe(
-    clabe_id number(10,0)
+    clabe_id number(10,0) default seq.nextval
       constraint clabe_pk primary key,
     clabe number(18,0) not null,
     vivienda_id number(10,0) not null,
@@ -135,7 +145,7 @@ create table  clabe(
 
 prompt TABLA NOTIFICACION
 create table notificacion(
-    notificacion_id number(10,0)
+    notificacion_id number(10,0) default seq.nextval
       constraint notificacion_pk primary key,
     numero_celular number(15,0) not null,
     enviado number(1,0) not null,
@@ -147,11 +157,12 @@ create table notificacion(
     constraint notificacion_vivienda_id_fk
       foreign key (vivienda_id)
       references vivienda_vacacion(vivienda_id),
+    constraint notificacion_enviado_chk check(enviado=1 or enviado=0)
 );
 
 prompt TABLA MENSAJE
 create table mensaje(
-    mensaje_id number(10,0)
+    mensaje_id number(10,0) default seq.nextval
       constraint mensaje_pk primary key,
     contenido varchar2(2000) not null,
     visto number(1,0) not null,
@@ -167,11 +178,12 @@ create table mensaje(
     constraint mensaje_vivienda_id_fk
       foreign key (vivienda_id)
       references vivienda(vivienda_id),
+    constraint mensaje_visto_chk check(visto=1 or visto=0)
 );
 
 prompt TABLA TARJETA_CREDITO
 create table tarjeta_credito(
-    tarjeta_credito_id number(10,0)
+    tarjeta_credito_id number(10,0) default seq.nextval
       constraint tarjeta_credito_pk primary key,
     numero_tarjeta number(16,0) not null,
     mes_expiracion number(2,0) not null,
@@ -180,11 +192,14 @@ create table tarjeta_credito(
     constraint tc_usuario_id_fk
       foreign key (usuario_id)
       references usuario(usuario_id),
+    constraint tc_mes_expiracion_chk check(
+      mes_expiracion > 0 and mes_expiracion < 13),
+    constraint tc_anio_expiracion_chk check(anio_expiracion >= 20 )
 );
 
 prompt TABLA TRANSACCION
 create table transaccion (
-    transaccion_id number(10,0)
+    transaccion_id number(10,0) default seq.nextval
       constraint transaccion_pk primary key,
     comision number(24,4) not null,
     clave_interbancaria number(18,0) not null,
@@ -196,21 +211,21 @@ create table transaccion (
     constraint transaccion_vivienda_id_fk
       foreign key (vivienda_id)
       references vivienda_venta(vivienda_id),
+    constraint transaccion_comision_chk check(comision>0)
 );
 
 prompt TABLA SERVICIO
 create table servicio(
-    servicio_id number(10,0)
+    servicio_id number(10,0) default seq.nextval
      constraint servicio_pk primary key,
     nombre varchar2(100) not null,
     descripcion varchar2(2000) not null,
-    icono blob not null,
-
+    icono blob not null
 );
 
 prompt TABLA VIVIENDA_SERVICIO
-create table vienda_servicio(
-    vivienda_servicio_id number(10,0)
+create table vivienda_servicio(
+    vivienda_servicio_id number(10,0) default seq.nextval
       constraint vivienda_servicio_pk primary key,
     servicio_id number(10,0) not null,
     vivienda_id number(10,0) not null,
@@ -224,16 +239,18 @@ create table vienda_servicio(
 
 prompt TABLA STATUS_VIVIENDA
 create table status_vivienda(
-    status_vivienda_id number(10,0)
+    status_vivienda_id number(10,0) default seq.nextval
       constraint status_vivienda_pk primary key,
     clave varchar2(30) not null,
     descripcion varchar2(2000) not null
-
+    constraint sv_clave_chk check(
+      clave in('DISPONIBLE','EN RENTA','ALQUILADA',
+              'EN VENTA', 'VENDIDA', 'INACTIVA'))
 );
 
 prompt TABLA HISTORICO_VIVIENDA
 create table historico_vivienda(
-    historico_vivienda_id number(10,0)
+    historico_vivienda_id number(10,0) default seq.nextval
       constraint historico_vivienda_pk primary key,
     fecha_status date not null
     vivienda_id number(10,0) not null,
@@ -249,14 +266,15 @@ create table historico_vivienda(
 prompt TABLA MENSUALIDAD
 create table mensualidad(
     transaccion_id number(10,0),
-    numero_pago number(2,0) not null,
-    fecha_pago date not null,
+    numero_pago number(2,0) default seq.nextval,
+    fecha_pago date default sysdate not null,
     importe number(24,4) not null,
     evidencia blob not null,
     constraint mensualidad_pk primary key(transaccion_id, numero_pago),
     constraint mensualidad_transaccion_id_fk
       foreign key (transaccion_id)
       references transaccion(transaccion_id),
+    constraint mensualidad_importe_chk check(importe > 0)
 );
 
 prompt ¡LISTO!
