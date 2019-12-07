@@ -71,6 +71,7 @@ create table vivienda_vacacion(
     fecha_inicio date not null,
     fecha_fin date not null,
     numero_dias number(10,0) not null, --virtual?
+    precio_dia number(24,4) not null,
     constraint vvac_vivienda_id_fk
       foreign key (vivienda_id)
       references vivienda(vivienda_id),
