@@ -61,7 +61,9 @@ create table venta(
     folio varchar2(18) not null,
     avaluo blob not null,
     precio_inicial number(24,4) not null,
-
+    constraint vven_vivienda_id_fk
+      foreign key (vivienda_id)
+      references vivienda(vivienda_id),
 );
 
 prompt TABLA VIVIENDA_VACACION
@@ -70,8 +72,10 @@ create table vacacion(
       constraint vivienda_vacacion_pk primary key,
     fecha_inicio date not null,
     fecha_fin date not null,
-    numero_dias number(10,0) not null --virtual?
-
+    numero_dias number(10,0) not null, --virtual?
+    constraint vvac_vivienda_id_fk
+      foreign key (vivienda_id)
+      references vivienda(vivienda_id),
 );
 
 prompt TABLA CONTRATO
@@ -81,7 +85,14 @@ create table contrato(
     folio varchar2(30) not null,
     fecha_contrato date not null,
     clausula_firmas blob not null,
-
+    vivienda_id number(10,0) not null,
+    usuario_id number(10,0) not null,
+    constraint contrato_vivienda_id_fk
+      foreign key (vivienda_id)
+      references vivienda_renta(vivienda_id),
+    constraint contrato_usuario_id_fk
+      foreign key (usuario_id)
+      references usuario(usuario_id),
 );
 
 prompt TABLA ALQUILER
