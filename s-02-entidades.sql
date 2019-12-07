@@ -26,8 +26,8 @@ prompt TABLA VIVIENDA
 create table vivienda(
     vivienda_id number(10,0) default vivienda_seq.nextval
       constraint vivienda_pk primary key,
-    longitud varchar2(40) not null,
-    latitud varchar2(40) not null,
+    longitud number(40, 20) not null,
+    latitud number(40, 20) not null,
     direccion varchar2(100) not null,
     capacidad number(4,0) not null,
     descripcion varchar2(2000) not null,
@@ -79,7 +79,6 @@ create table vivienda_vacacion(
       constraint vivienda_vacacion_pk primary key,
     fecha_inicio date not null,
     fecha_fin date not null,
-    numero_dias number(10,0) not null, --virtual?
     precio_dia number(24,4) not null,
     constraint vvac_vivienda_id_fk
       foreign key (vivienda_id)
@@ -111,6 +110,9 @@ create table alquiler(
     alquiler_id number(10,0) default alquiler_seq.nextval,
       constraint alquiler_pk primary key,
     folio varchar2(20) not null,
+    fecha_inicio date not null,
+    fecha_fin date not null,
+    precio_total number(24,4) not null,
     usuario_id number(10,0) not null,
     vivienda_id number(10,0) not null,
     constraint alquiler_usuario_id_fk
@@ -119,7 +121,8 @@ create table alquiler(
     constraint alquiler_vivienda_id_fk
       foreign key (vivienda_id)
       references vivienda(vivienda_id),
-    constraint alquiler_folio_uk unique (folio)
+    constraint alquiler_folio_uk unique (folio),
+    constraint alquiler_fecha_chk check (fecha_fin-fecha_inicio>0)
 );
 
 prompt TABLA IMAGEN
