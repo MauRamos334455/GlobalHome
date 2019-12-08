@@ -18,6 +18,11 @@ create user kgr_proy_admin
 identified by carima
 quota 1024m on users;
 
+prompt CREANDO DIRECTORIO MULTIMEDIA...
+create directory multimedia as '/home/multimedia';
+grant read, write on directory multimedia to kgr_proy_admin;
+grant read, write on directory multimedia to kgr_proy_invitado;
+
 prompt CREANDO ROLES...
 create role rol_admin;
 grant create table, create sequence,

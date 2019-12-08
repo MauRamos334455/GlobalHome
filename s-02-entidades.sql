@@ -22,6 +22,17 @@ create table usuario(
     constraint usuario_contrasenia_chk check(LENGTH(contrasenia)>=8)
 );
 
+prompt TABLA STATUS_VIVIENDA
+create table status_vivienda(
+    status_vivienda_id number(10,0) default status_vivienda_seq.nextval
+      constraint status_vivienda_pk primary key,
+    clave varchar2(30) not null,
+    descripcion varchar2(2000) not null
+    constraint sv_clave_chk check(
+      clave in('DISPONIBLE','EN RENTA','ALQUILADA',
+              'EN VENTA', 'VENDIDA', 'INACTIVA'))
+);
+
 prompt TABLA VIVIENDA
 create table vivienda(
     vivienda_id number(10,0) default vivienda_seq.nextval
@@ -80,6 +91,7 @@ create table vivienda_vacacion(
     fecha_inicio date not null,
     fecha_fin date not null,
     precio_dia number(24,4) not null,
+    numero_dias number(10, 0) not null,
     constraint vvac_vivienda_id_fk
       foreign key (vivienda_id)
       references vivienda(vivienda_id),
@@ -112,6 +124,8 @@ create table alquiler(
     folio varchar2(20) not null,
     fecha_inicio date not null,
     fecha_fin date not null,
+    dias_hospedaje as
+      (fecha_fin - fecha_inicio) virtual
     precio_total number(24,4) not null,
     usuario_id number(10,0) not null,
     vivienda_id number(10,0) not null,
@@ -124,6 +138,24 @@ create table alquiler(
     constraint alquiler_folio_uk unique (folio),
     constraint alquiler_fecha_chk check (fecha_fin-fecha_inicio>0)
 );
+
+prompt TABLA TRANSACCION
+create table transaccion (
+    transaccion_id number(10,0) default transaccion_seq.nextval
+      constraint transaccion_pk primary key,
+    comision number(24,4) not null,
+    clave_interbancaria number(18,0) not null,
+    usuario_id number(10,0) not null,
+    vivienda_id number(10,0) not null,
+    constraint transaccion_usuario_id_fk
+      foreign key (usuario_id)
+      references usuario(usuario_id),
+    constraint transaccion_vivienda_id_fk
+      foreign key (vivienda_id)
+      references vivienda_venta(vivienda_id),
+    constraint transaccion_comision_chk check(comision>0)
+);
+
 
 prompt TABLA IMAGEN
 create table imagen(
@@ -202,23 +234,6 @@ create table tarjeta_credito(
     constraint tc_anio_expiracion_chk check(anio_expiracion >= 20 )
 );
 
-prompt TABLA TRANSACCION
-create table transaccion (
-    transaccion_id number(10,0) default transaccion_seq.nextval
-      constraint transaccion_pk primary key,
-    comision number(24,4) not null,
-    clave_interbancaria number(18,0) not null,
-    usuario_id number(10,0) not null,
-    vivienda_id number(10,0) not null,
-    constraint transaccion_usuario_id_fk
-      foreign key (usuario_id)
-      references usuario(usuario_id),
-    constraint transaccion_vivienda_id_fk
-      foreign key (vivienda_id)
-      references vivienda_venta(vivienda_id),
-    constraint transaccion_comision_chk check(comision>0)
-);
-
 prompt TABLA SERVICIO
 create table servicio(
     servicio_id number(10,0) default servicio_seq.nextval
@@ -241,17 +256,6 @@ create table vivienda_servicio(
     constraint vs_vivienda_id_fk
       foreign key (vivienda_id)
       references vivienda(vivienda_id),
-);
-
-prompt TABLA STATUS_VIVIENDA
-create table status_vivienda(
-    status_vivienda_id number(10,0) default status_vivienda_seq.nextval
-      constraint status_vivienda_pk primary key,
-    clave varchar2(30) not null,
-    descripcion varchar2(2000) not null
-    constraint sv_clave_chk check(
-      clave in('DISPONIBLE','EN RENTA','ALQUILADA',
-              'EN VENTA', 'VENDIDA', 'INACTIVA'))
 );
 
 prompt TABLA HISTORICO_VIVIENDA
