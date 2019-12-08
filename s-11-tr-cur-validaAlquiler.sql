@@ -5,15 +5,17 @@
 --@Fecha creación: 07/12/2019
 --@Descripción: Creación del trigger que verifica si existe por lo menos
 --una tarjeta registrada para realizar un alquiler.
+prompt CONECTANDO...
+connect kgr_proy_admin/carima;
 
 create or replace trigger trg_valida_targeta_alq
-  before insert of alquiler
+  before insert on alquiler
   for each row
   declare
   cursor cur_tarjetas is
-    select mes_expiracion, anio_expiracion into v_num_tarjetas
+    select mes_expiracion, anio_expiracion
     from tarjeta_credito
-    where usuario = :new.usuario_id;
+    where usuario_id = :new.usuario_id;
     v_mes_expiracion tarjeta_credito.mes_expiracion%type;
     v_anio_expiracion tarjeta_credito.anio_expiracion%type;
     v_targeta_valida number;
@@ -30,7 +32,7 @@ create or replace trigger trg_valida_targeta_alq
         if v_anio_actual <= v_anio_expiracion and v_mes_actual < v_mes_expiracion then
             v_targeta_valida := 1;
         end if;
-        exit when cur_tarjetas%notfound or v_targeta_valida := 1;
+        exit when cur_tarjetas%notfound or v_targeta_valida = 1;
     end loop;
     close cur_tarjetas;
     if v_targeta_valida = 1 then
