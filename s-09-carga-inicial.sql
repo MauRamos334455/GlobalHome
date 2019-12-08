@@ -36,10 +36,129 @@ insert into vivienda_renta (vivienda_id, renta_mensual, dia_deposito) values (6,
 insert into vivienda_renta (vivienda_id, renta_mensual, dia_deposito) values (8, 48059.376, 6);
 
 
-prompt DATOS DE VIVIENDA_VACACION
-insert into vivienda_venta (vivienda_id, numero_catastral, folio, avaluo, precio_inicial) values (4, 50365050493, '200ESNS601DYEF1796', null, 538711532.625);
-insert into vivienda_venta (vivienda_id, numero_catastral, folio, avaluo, precio_inicial) values (5, 28152434168, '391QUFG723PDKB7149', null, 273179743.768);
-insert into vivienda_venta (vivienda_id, numero_catastral, folio, avaluo, precio_inicial) values (7, 93119056300, '312IEQV053EIUY1865', null, 98027280.254);
-insert into vivienda_venta (vivienda_id, numero_catastral, folio, avaluo, precio_inicial) values (9, 25263765175, '698UWLV392BELJ1738', null, 811009399.687);
-
 prompt DATOS DE VIVIENDA_VENTA
+insert into vivienda_venta (vivienda_id, numero_catastral, folio, avaluo, precio_inicial) values (4, 50365050493, '200ESNS601DYEF1796', bfilename('pdf','prueba.pdf'), 538711532.625);
+insert into vivienda_venta (vivienda_id, numero_catastral, folio, avaluo, precio_inicial) values (5, 28152434168, '391QUFG723PDKB7149', bfilename('pdf','prueba.pdf'), 273179743.768);
+insert into vivienda_venta (vivienda_id, numero_catastral, folio, avaluo, precio_inicial) values (7, 93119056300, '312IEQV053EIUY1865', bfilename('pdf','prueba.pdf'), 98027280.254);
+insert into vivienda_venta (vivienda_id, numero_catastral, folio, avaluo, precio_inicial) values (9, 25263765175, '698UWLV392BELJ1738', bfilename('pdf','prueba.pdf'), 811009399.687);
+
+prompt DATOS DE VIVIENDA_VACACION
+insert into vivienda_vacacion (vivienda_id, fecha_inicio, fecha_fin, precio_dia) values (1, to_date('07/12/2019', 'dd/mm/yyyy'), to_date('07/12/2020', 'dd/mm/yyyy'), 1868.18);
+insert into vivienda_vacacion (vivienda_id, fecha_inicio, fecha_fin, precio_dia) values (2, to_date('07/12/2019', 'dd/mm/yyyy'), to_date('07/12/2020', 'dd/mm/yyyy'), 8161.18);
+insert into vivienda_vacacion (vivienda_id, fecha_inicio, fecha_fin, precio_dia) values (3, to_date('07/12/2019', 'dd/mm/yyyy'), to_date('07/12/2020', 'dd/mm/yyyy'), 1398.75);
+insert into vivienda_vacacion (vivienda_id, fecha_inicio, fecha_fin, precio_dia) values (6, to_date('07/12/2019', 'dd/mm/yyyy'), to_date('07/12/2020', 'dd/mm/yyyy'), 2759.4);
+insert into vivienda_vacacion (vivienda_id, fecha_inicio, fecha_fin, precio_dia) values (10, to_date('07/12/2019', 'dd/mm/yyyy'), to_date('07/12/2020', 'dd/mm/yyyy'), 8992.98);
+
+prompt DATOS CONTRATO
+insert into contrato (contrato_id, folio, fecha_contrato, clausula_firmas, vivienda_id, usuario_id) values (contrato_seq.nextval, '5004SNZ601TYEF1796', sysdate, bfilename('pdf','prueba.pdf'), 1, 1);
+insert into contrato (contrato_id, folio, fecha_contrato, clausula_firmas, vivienda_id, usuario_id) values (contrato_seq.nextval, '7005UNZ601TY4F1796', sysdate, bfilename('pdf','prueba.pdf'), 3, 2);
+
+prompt DATOS ALQUILER
+insert into alquiler (alquiler_id, folio, fecha_inicio, fecha_fin, precio_total, usuario_id, vivienda_id) values (alquiler_seq.nextval, '0005UYZ601TY4F17934', to_date('15/12/2019', 'dd/mm/yyyy'), to_date('01/01/2020', 'dd/mm/yyyy'), 4, 2);
+insert into alquiler (alquiler_id, folio, fecha_inicio, fecha_fin, precio_total, usuario_id, vivienda_id) values (alquiler_seq.nextval, '2305UT8U01TY4F14934', to_date('17/12/2019', 'dd/mm/yyyy'), to_date('03/02/2020', 'dd/mm/yyyy'), 5, 6);
+
+prompt DATOS TRANSACCION
+insert into transaccion (transaccion_id, comision, clave_interbancaria, usuario_id, vivienda_id) values(transaccion_seq.nextval, 110.99,923476590123674857,10,7);
+insert into transaccion (transaccion_id, comision, clave_interbancaria, usuario_id, vivienda_id) values(transaccion_seq.nextval, 110.99,995466598193174857,9,9);
+
+prompt DATOS IMAGEN
+insert into imagen (vivienda_id, numero, contenido) values (1, 1, bfilename('pdf','imagen.png'));
+insert into imagen (vivienda_id, numero, contenido) values (1, 2, bfilename('pdf','imagen.png'));
+insert into imagen (vivienda_id, numero, contenido) values (1, 3, bfilename('pdf','imagen.png'));
+insert into imagen (vivienda_id, numero, contenido) values (2, 1, bfilename('pdf','imagen.png'));
+insert into imagen (vivienda_id, numero, contenido) values (2, 2, bfilename('pdf','imagen.png'));
+insert into imagen (vivienda_id, numero, contenido) values (2, 3, bfilename('pdf','imagen.png'));
+insert into imagen (vivienda_id, numero, contenido) values (3, 1, bfilename('pdf','imagen.png'));
+insert into imagen (vivienda_id, numero, contenido) values (4, 1, bfilename('pdf','imagen.png'));
+insert into imagen (vivienda_id, numero, contenido) values (5, 1, bfilename('pdf','imagen.png'));
+insert into imagen (vivienda_id, numero, contenido) values (6, 1, bfilename('pdf','imagen.png'));
+
+prompt DATOS CLABE
+insert into clabe (clabe_id, clabe, vivienda_id) values (clabe_seq.nextval, 123456789101213142, 8);
+insert into clabe (clabe_id, clabe, vivienda_id) values (clabe_seq.nextval, 321456789101213142, 8);
+insert into clabe (clabe_id, clabe, vivienda_id) values (clabe_seq.nextval, 312456789101213142, 3);
+insert into clabe (clabe_id, clabe, vivienda_id) values (clabe_seq.nextval, 411456789101213142, 6);
+insert into clabe (clabe_id, clabe, vivienda_id) values (clabe_seq.nextval, 123456789101213142, 1);
+
+prompt DATOS NOTIFICACION
+insert into notificacion (notificacion_id, numero_celular, enviado, usuario_id, vivienda_id) values (notificacion_seq.nextval, 5512345678,0,7,10);
+insert into notificacion (notificacion_id, numero_celular, enviado, usuario_id, vivienda_id) values (notificacion_seq.nextval, 5524436587,1,5,10);
+
+prompt DATOS MENSAJE
+insert into mensaje (mensaje_id, contenido, visto, respuesta_id, usuario_id, vivienda_id) values (mensaje_seq.nextval, 'me interesa la casa, cuanto cuesta', 0, null,  8, 8);
+insert into mensaje (mensaje_id, contenido, visto, respuesta_id, usuario_id, vivienda_id) values (mensaje_seq.nextval, 'necesito informes', 1, 3, 5, 2);
+insert into mensaje (mensaje_id, contenido, visto, respuesta_id, usuario_id, vivienda_id) values (mensaje_seq.nextval, 'te paso mi numero para los informes', 0, null,  10, 2);
+
+prompt DATOS TARJETA_CREDITO
+insert into tarjeta_credito (tarjeta_credito_id, numero_tarjeta, mes_expiracion, anio_expiracion, usuario_id) values (tarjeta_credito_seq.nextval, 5204165313218765, 1, 20, 2);
+insert into tarjeta_credito (tarjeta_credito_id, numero_tarjeta, mes_expiracion, anio_expiracion, usuario_id) values (tarjeta_credito_seq.nextval, 2094351172086681, 7, 23, 8);
+insert into tarjeta_credito (tarjeta_credito_id, numero_tarjeta, mes_expiracion, anio_expiracion, usuario_id) values (tarjeta_credito_seq.nextval, 5402195718238460, 10, 24, 6);
+insert into tarjeta_credito (tarjeta_credito_id, numero_tarjeta, mes_expiracion, anio_expiracion, usuario_id) values (tarjeta_credito_seq.nextval, 1304925446210725, 3, 27, 3);
+insert into tarjeta_credito (tarjeta_credito_id, numero_tarjeta, mes_expiracion, anio_expiracion, usuario_id) values (tarjeta_credito_seq.nextval, 6328156332410233, 12, 23, 1);
+insert into tarjeta_credito (tarjeta_credito_id, numero_tarjeta, mes_expiracion, anio_expiracion, usuario_id) values (tarjeta_credito_seq.nextval, 2884567012146583, 8, 25, 5);
+insert into tarjeta_credito (tarjeta_credito_id, numero_tarjeta, mes_expiracion, anio_expiracion, usuario_id) values (tarjeta_credito_seq.nextval, 0954287650412347, 2, 24, 7);
+insert into tarjeta_credito (tarjeta_credito_id, numero_tarjeta, mes_expiracion, anio_expiracion, usuario_id) values (tarjeta_credito_seq.nextval, 7613147249572810, 7, 26, 4);
+insert into tarjeta_credito (tarjeta_credito_id, numero_tarjeta, mes_expiracion, anio_expiracion, usuario_id) values (tarjeta_credito_seq.nextval, 1234235609725183, 5, 21, 9);
+insert into tarjeta_credito (tarjeta_credito_id, numero_tarjeta, mes_expiracion, anio_expiracion, usuario_id) values (tarjeta_credito_seq.nextval, 8423065138913307, 11, 22, 10);
+
+prompt DATOS SERVICIO
+insert into servicio (servicio_id, nombre, descripcion, icono blob) values (servicio_seq.nextval, 'GIMNASIO','Gimnasio incluido en la vivienda', bfilename('pdf','imagen.png'));
+insert into servicio (servicio_id, nombre, descripcion, icono blob) values (servicio_seq.nextval, 'WIFI','Internet incluido en la vivienda', bfilename('pdf','imagen.png'));
+insert into servicio (servicio_id, nombre, descripcion, icono blob) values (servicio_seq.nextval, 'ALBERCA','Alberca incluido en la vivienda', bfilename('pdf','imagen.png'));
+insert into servicio (servicio_id, nombre, descripcion, icono blob) values (servicio_seq.nextval, 'SPA','Spa de belleza incluido en la vivienda', bfilename('pdf','imagen.png'));
+insert into servicio (servicio_id, nombre, descripcion, icono blob) values (servicio_seq.nextval, 'ESTACIONAMIENTO','Lugar de estacionamiento incluido en la vivienda', bfilename('pdf','imagen.png'));
+insert into servicio (servicio_id, nombre, descripcion, icono blob) values (servicio_seq.nextval, 'TELEVISION','Television incluida en la vivienda', bfilename('pdf','imagen.png'));
+insert into servicio (servicio_id, nombre, descripcion, icono blob) values (servicio_seq.nextval, 'AIRE ACONDICIONADO','Aire acondicionado incluido en la vivienda', bfilename('pdf','imagen.png'));
+insert into servicio (servicio_id, nombre, descripcion, icono blob) values (servicio_seq.nextval, 'REFRIGERADOR','Refrigerador incluido en la vivienda', bfilename('pdf','imagen.png'));
+insert into servicio (servicio_id, nombre, descripcion, icono blob) values (servicio_seq.nextval, 'BAÑO','Baño completo incluido en la vivienda', bfilename('pdf','imagen.png'));
+insert into servicio (servicio_id, nombre, descripcion, icono blob) values (servicio_seq.nextval, 'PATIO','Patio incluido en la vivienda', bfilename('pdf','imagen.png'));
+
+prompt DATOS STATUS_VIVIENDA
+insert into status_vivienda (status_vivienda_id, clave, descripcion) values (status_vivienda_seq.nextval, 'DISPONIBLE', 'La vivienda se encuntra disponible');
+insert into status_vivienda (status_vivienda_id, clave, descripcion) values (status_vivienda_seq.nextval, 'EN RENTA', 'La vivienda se encuntra rentada por alguien');
+insert into status_vivienda (status_vivienda_id, clave, descripcion) values (status_vivienda_seq.nextval, 'ALQUILADA', 'La vivienda se encuntra alquilada por alguien');
+insert into status_vivienda (status_vivienda_id, clave, descripcion) values (status_vivienda_seq.nextval, 'EN VENTA', 'La vivienda se encuentra en venta');
+insert into status_vivienda (status_vivienda_id, clave, descripcion) values (status_vivienda_seq.nextval, 'VENDIDA', 'La vivienda fue vendida a alguien');
+insert into status_vivienda (status_vivienda_id, clave, descripcion) values (status_vivienda_seq.nextval, 'INACTIVA', 'La vivienda no se encuentra más disponible');
+
+prompt DATOS VIVIENDA_SERVICIO
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 1, 1);
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 2, 1);
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 3, 2);
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 4, 2);
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 5, 2);
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 1, 3);
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 4, 5);
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 9, 6);
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 10, 7);
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 1, 8);
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 3, 9);
+insert into vivienda_servicio (vivienda_servicio_id, servicio_id, vivienda_id) values (vivienda_servicio_seq.nextval, 4, 10);
+
+prompt DATOS HISTORICO_VIVIENDA
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, sysdate, 1, 1);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, sysdate, 2, 1);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, sysdate, 2, 1);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, sysdate, 2, 1);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, sysdate, 2, 1);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, sysdate, 2, 1);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, sysdate, 2, 1);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/2/2018', 'dd/mm/yyyy'), 1, 2);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/2/2018', 'dd/mm/yyyy'), 1, 2);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/2/2018', 'dd/mm/yyyy'), 1, 2);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/2/2018', 'dd/mm/yyyy'), 1, 2);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/2/2018', 'dd/mm/yyyy'), 1, 2);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/2/2018', 'dd/mm/yyyy'), 1, 2);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/2/2018', 'dd/mm/yyyy'), 1, 2);
+
+prompt DATOS MENSUALIDAD
+insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (1,1,to_date('01/08/2019','dd/mm/yyyy'),500, bfilename('pdf','prueba.pdf'));
+insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (1,2,to_date('01/09/2019','dd/mm/yyyy'),500, bfilename('pdf','prueba.pdf'));
+insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (1,3,to_date('01/10/2019','dd/mm/yyyy'),500, bfilename('pdf','prueba.pdf'));
+insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (1,4,to_date('01/11/2019','dd/mm/yyyy'),500, bfilename('pdf','prueba.pdf'));
+insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (1,5,sysdate,500, bfilename('pdf','prueba.pdf'));
+insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (2,1,to_date('01/08/2019','dd/mm/yyyy'),500, bfilename('pdf','prueba.pdf'));
+insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (2,2,to_date('01/09/2019','dd/mm/yyyy'),500, bfilename('pdf','prueba.pdf'));
+insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (2,3,to_date('01/10/2019','dd/mm/yyyy'),500, bfilename('pdf','prueba.pdf'));
+insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (2,4,to_date('01/11/2019','dd/mm/yyyy'),500, bfilename('pdf','prueba.pdf'));
+insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (2,5,sysdate,500, bfilename('pdf','prueba.pdf'));

@@ -127,14 +127,14 @@ create table alquiler(
 
 prompt TABLA IMAGEN
 create table imagen(
-    vivienda_id number(10,0)
+    vivienda_id number(10,0),
     numero number(2,0) default imagen_seq.nextval,
     contenido blob not null,
     constraint imagen_pk
       primary key (vivienda_id, numero),
     constraint vivienda_vivienda_id_fk
       foreign key (vivienda_id)
-      references vivienda(vivienda_id),
+      references vivienda(vivienda_id)
 );
 
 prompt TABLA CLABE

@@ -45,16 +45,6 @@ create sequence alquiler_seq
     order
 ;
 
-create sequence imagen_seq
-    start with 1
-    increment by 1
-    minvalue 1
-    maxvalue 20
-    nocycle
-    cache 20
-    order
-;
-
 create sequence clabe_seq
     start with 1
     increment by 1
@@ -140,16 +130,6 @@ create sequence historico_vivienda_seq
     increment by 1
     nominvalue
     nomaxvalue
-    nocycle
-    cache 20
-    order
-;
-
-create sequence mensualidad_seq
-    start with 1
-    increment by 1
-    minvalue  1
-    maxvalue 240
     nocycle
     cache 20
     order
