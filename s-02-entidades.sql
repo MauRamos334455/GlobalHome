@@ -48,9 +48,13 @@ create table vivienda(
     es_vacacion number(1,0) not null,
     es_venta number(1,0) not null,
     status_vivienda_id number(10,0) not null,
+    usuario_id number(10,0) not null
     constraint vstat_vivienda_id_fk
       foreign key (status_vivienda_id)
       references status_vivienda(status_vivienda_id),
+    constraint vstat_usuario_id_fk
+      foreign key (usuario_id)
+      references usuario(usuario_id),
     constraint vivienda_es_renta_es_vacacion_es_venta_chk check (
       ((es_renta = 1 or es_vacacion = 1) and es_venta = 0) or
        (es_venta = 1 and es_renta = 0 and es_vacacion = 0))
