@@ -40,6 +40,7 @@ create index vacacion_diafin_ix   on VACACION(extract(DAY from FECHA_FIN));
 create index vacacion_anioini_ix  on VACACION(extract(YEAR from FECHA_INICIO));
 create index vacacion_mesini_ix   on VACACION(extract(MONTH from FECHA_INICIO));
 create index vacacion_diaini_ix   on VACACION(extract(DAY from FECHA_INICIO));
+--Poner LOWER en las descripciones para agilizar los like
 
 prompt ¡LISTO!
 disconnect;
