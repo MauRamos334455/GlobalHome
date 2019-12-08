@@ -27,7 +27,7 @@ prompt CREANDO ROLES...
 create role rol_admin;
 grant create table, create sequence,
       create session, create procedure,
-      create synonym, create view, 
+      create synonym, create view,
       create public synonym,
       create any synonym,
       create trigger to kgr_proy_admin;

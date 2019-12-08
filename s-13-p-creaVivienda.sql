@@ -6,6 +6,10 @@
 --@Descripción: Valida y modifica los registros para alquilar una vivienda,
 -- Valida que la vivienda que se quiere alquilar, vender o rentar esté disponible,
 -- de estarlo modifica todos los valores necesarios para su incersión
+
+prompt CONECTANDO...
+connect kgr_proy_admin/carima;
+
 create or replace procedure creaVivienda(
 p_vivienda_id  out number,
 p_longitud number,
@@ -60,16 +64,16 @@ begin
     values (v_vivienda_id, p_renta_mensual, p_dia_deposito);
   end if;
 
-    if p_es_vacacion = 1 then
-      v_numero_dias := p_fecha_fin - p_fecha_inicio;
-      if v_numero_dias >0 then
-        insert into vivienda_vacacion (vivienda_id, fecha_inicio, fecha_fin,
-          precio_dia, numero_dias)
-        values (v_vivienda_id, p_fecha_inicio, p_fecha_fin, p_precio_dia, v_numero_dias);
-      else
-        raise_application_error ( -40011 ,'ERROR: La fecha fin no puede ser igual o menor a la fecha de inicio.');
-      end if;
+  if p_es_vacacion = 1 then
+    v_numero_dias := p_fecha_fin - p_fecha_inicio;
+    if v_numero_dias >0 then
+      insert into vivienda_vacacion (vivienda_id, fecha_inicio, fecha_fin,
+        precio_dia, numero_dias)
+      values (v_vivienda_id, p_fecha_inicio, p_fecha_fin, p_precio_dia, v_numero_dias);
+    else
+      raise_application_error ( -40011 ,'ERROR: La fecha fin no puede ser igual o menor a la fecha de inicio.');
     end if;
+  end if;
 end creaVivienda;
 /
 show errors
