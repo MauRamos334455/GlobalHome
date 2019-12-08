@@ -5,6 +5,8 @@
 --@Descripción: Creación de secuencias (DDL)
 --de la base de datos para el proyecto GlobalHome.
 
+prompt CONECTANDO...
+connect kgr_proy_admin/carima;
 create sequence usuario_seq
     start with 1
     increment by 1
@@ -134,3 +136,5 @@ create sequence historico_vivienda_seq
     cache 20
     order
 ;
+prompt ¡LISTO!
+disconnect;

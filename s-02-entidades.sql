@@ -5,7 +5,8 @@
 --@Descripción: Creación de tablas (DDL)
 --de la base de datos para el proyecto GlobalHome.
 
-connect kgr_proy_admin;
+prompt CONECTANDO...
+connect kgr_proy_admin/carima;
 
 prompt TABLA USUARIOS
 create table usuario(
@@ -27,7 +28,7 @@ create table status_vivienda(
     status_vivienda_id number(10,0) default status_vivienda_seq.nextval
       constraint status_vivienda_pk primary key,
     clave varchar2(30) not null,
-    descripcion varchar2(2000) not null
+    descripcion varchar2(2000) not null,
     constraint sv_clave_chk check(
       clave in('DISPONIBLE','EN RENTA','ALQUILADA',
               'EN VENTA', 'VENDIDA', 'INACTIVA'))
@@ -37,8 +38,8 @@ prompt TABLA VIVIENDA
 create table vivienda(
     vivienda_id number(10,0) default vivienda_seq.nextval
       constraint vivienda_pk primary key,
-    longitud number(40, 20) not null,
-    latitud number(40, 20) not null,
+    longitud number(30, 15) not null,
+    latitud number(30, 15) not null,
     direccion varchar2(100) not null,
     capacidad number(4,0) not null,
     descripcion varchar2(2000) not null,
@@ -47,7 +48,7 @@ create table vivienda(
     es_vacacion number(1,0) not null,
     es_venta number(1,0) not null,
     status_vivienda_id number(10,0) not null,
-    constraint vs_vivienda_id_fk
+    constraint vstat_vivienda_id_fk
       foreign key (status_vivienda_id)
       references status_vivienda(status_vivienda_id),
     constraint vivienda_es_renta_es_vacacion_es_venta_chk check (
@@ -119,13 +120,13 @@ create table contrato(
 
 prompt TABLA ALQUILER
 create table alquiler(
-    alquiler_id number(10,0) default alquiler_seq.nextval,
+    alquiler_id number(10,0) default alquiler_seq.nextval
       constraint alquiler_pk primary key,
     folio varchar2(20) not null,
     fecha_inicio date not null,
     fecha_fin date not null,
     dias_hospedaje as
-      (fecha_fin - fecha_inicio) virtual
+      (fecha_fin - fecha_inicio) virtual,
     precio_total number(24,4) not null,
     usuario_id number(10,0) not null,
     vivienda_id number(10,0) not null,
@@ -160,7 +161,7 @@ create table transaccion (
 prompt TABLA IMAGEN
 create table imagen(
     vivienda_id number(10,0),
-    numero number(2,0) default imagen_seq.nextval,
+    numero number(2,0) not null,
     contenido blob not null,
     constraint imagen_pk
       primary key (vivienda_id, numero),
@@ -177,7 +178,7 @@ create table  clabe(
     vivienda_id number(10,0) not null,
     constraint clabe_vivienda_id_fk
       foreign key (vivienda_id)
-      references vivienda_renta(vivienda_id),
+      references vivienda_renta(vivienda_id)
 );
 
 prompt TABLA NOTIFICACION
@@ -208,7 +209,7 @@ create table mensaje(
     vivienda_id number(10,0) not null,
     constraint mensaje_respuesta_id_fk
       foreign key (respuesta_id)
-      references mensaje(respuesta_id),
+      references mensaje(mensaje_id),
     constraint mensaje_usuario_id_fk
       foreign key (usuario_id)
       references usuario(usuario_id),
@@ -255,28 +256,28 @@ create table vivienda_servicio(
       references servicio(servicio_id),
     constraint vs_vivienda_id_fk
       foreign key (vivienda_id)
-      references vivienda(vivienda_id),
+      references vivienda(vivienda_id)
 );
 
 prompt TABLA HISTORICO_VIVIENDA
 create table historico_vivienda(
     historico_vivienda_id number(10,0) default historico_vivienda_seq.nextval
       constraint historico_vivienda_pk primary key,
-    fecha_status date not null
+    fecha_status date not null,
     vivienda_id number(10,0) not null,
     status_vivienda_id number(10,0) not null,
     constraint hv_status_vivienda_id_fk
       foreign key (status_vivienda_id)
-      references status_vivienda(usuario_id),
+      references status_vivienda(status_vivienda_id),
     constraint hv_vivienda_id_fk
       foreign key (vivienda_id)
-      references vivienda(vivienda_id),
+      references vivienda(vivienda_id)
 );
 
 prompt TABLA MENSUALIDAD
 create table mensualidad(
     transaccion_id number(10,0),
-    numero_pago number(2,0) default mensualidad_seq.nextval,
+    numero_pago number(2,0) not null,
     fecha_pago date default sysdate not null,
     importe number(24,4) not null,
     evidencia blob not null,

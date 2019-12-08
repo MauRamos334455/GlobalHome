@@ -19,7 +19,7 @@ identified by carima
 quota 1024m on users;
 
 prompt CREANDO DIRECTORIO MULTIMEDIA...
-create directory multimedia as '/home/multimedia';
+create directory multimedia as '/home/oracle/multimedia';
 grant read, write on directory multimedia to kgr_proy_admin;
 grant read, write on directory multimedia to kgr_proy_invitado;
 
@@ -27,8 +27,8 @@ prompt CREANDO ROLES...
 create role rol_admin;
 grant create table, create sequence,
       create session, create procedure,
-      create synonym, create index,
-      create view, create public synonym,
+      create synonym, create view, 
+      create public synonym,
       create any synonym,
       create trigger to kgr_proy_admin;
 create role rol_invitado;
