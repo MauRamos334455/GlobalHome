@@ -1,0 +1,10 @@
+34,11.5865869,11.4865869,Departamento de cinco pisos,Demolicion,13/09/2015
+21,12.6865869,21.4865869,Casa roja enorme,Terremoto,19/09/2015
+10,5.7865869,88.4865869,Departamento con vista al mar,Tsunami,14/07/2011
+15,82.8865869,13.4865869,Casa cerca del bosque,Incendio,21/05/2010
+14,41.9865869,19.4865869,Departamento piso quince,Incendio,20/04/2009
+84,7.1065869,5.4865869,Casa en unidad CTM,Demolicion,13/02/2015
+32,3.1165869,1.4865869,Parque de diversiones,Demolicion,08/09/2012
+17,2.1265869,45.4865869,Parque acuatico,Huracan,13/09/2015
+50,1.1365869,62.4865869,Casa rustica de los Cortes,Huracan,13/09/2015  
+55,19.1465869,21.4865869,Ya no se que mas poner sobre bienes raíces,Huracan,13/09/2015

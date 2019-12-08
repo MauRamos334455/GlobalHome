@@ -152,7 +152,7 @@ insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id
 insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/10/2019', 'dd/mm/yyyy'), 4, 4);
 insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/02/2018', 'dd/mm/yyyy'), 5, 1);
 insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/12/2019', 'dd/mm/yyyy'), 5, 6);
-insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/2/2018', 'dd/mm/yyyy'), 6, 1);
+insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/02/2018', 'dd/mm/yyyy'), 6, 1);
 insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('05/12/2019', 'dd/mm/yyyy'), 6, 3);
 insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('27/01/2018', 'dd/mm/yyyy'), 7, 4);
 insert into historico_vivienda (historico_vivienda_id, fecha_status, vivienda_id, status_vivienda_id) values (historico_vivienda_seq.nextval, to_date('27/06/2019', 'dd/mm/yyyy'), 7, 5);
@@ -174,5 +174,8 @@ insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evide
 insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (2,3,to_date('01/10/2019','dd/mm/yyyy'),500, bfilename('MULTIMEDIA','prueba.pdf'));
 insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (2,4,to_date('01/11/2019','dd/mm/yyyy'),500, bfilename('MULTIMEDIA','prueba.pdf'));
 insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evidencia) values (2,5,sysdate,500, bfilename('MULTIMEDIA','prueba.pdf'));
+
+prompt DATOS INTERESADO
+insert into interesado (usuario_id, nombre_usuario, email, vivienda_id, longitud, latitud, direccion, es_renta, es_vacacion, es_venta) values (5,'sbienvenu4','sbienvenu4@amazon.co.jp',2,23.5966577, -6.1306709, '51 Sutherland Drive',0,1,0);
 
 disconnect;
