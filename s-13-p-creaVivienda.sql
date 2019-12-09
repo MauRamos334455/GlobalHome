@@ -77,3 +77,5 @@ begin
 end creaVivienda;
 /
 show errors
+
+disconnect;

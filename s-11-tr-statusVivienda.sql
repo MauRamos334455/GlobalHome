@@ -30,3 +30,5 @@ create or replace trigger trg_status_vivienda
   end trg_status_vivienda;
   /
   show errors
+
+disconnect;

@@ -33,3 +33,5 @@ begin
 end creaReporte;
 /
 show errors
+
+disconnect;

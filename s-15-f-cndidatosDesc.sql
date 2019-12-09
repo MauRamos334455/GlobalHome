@@ -48,3 +48,5 @@ begin
 end descuento;
 /
 show errors
+
+disconnect;

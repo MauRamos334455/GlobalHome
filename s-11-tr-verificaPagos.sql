@@ -58,3 +58,5 @@ create or replace trigger trg_verifica_pago
   end trg_verifica_pago;
   /
   show errors
+
+disconnect;
