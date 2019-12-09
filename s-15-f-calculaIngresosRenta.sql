@@ -2,10 +2,10 @@
     --García García Ricardo
     --Kennedy Villa Carolina
     --Ramos Villaseñor César Mauricio
---@Fecha creación: 07/12/2019
---@Descripción: Crea un reporte considerando todos los inmuebles creados entre
--- esas fechas, el reporte muestra los ingresos obtenidos por ventas y vacaiones
---de un determinado inmueble. Adicionalmente si está activado el usuario se dará para ese usuario en especísico
+--@Fecha creación: 08/12/2019
+--@Descripción: Calcula el valor de ingresos a lo largo del tiempo de una
+--vivienda por todas sus contratos de renta.
+
 prompt CONECTANDO...
 connect kgr_proy_admin/carima;
 
