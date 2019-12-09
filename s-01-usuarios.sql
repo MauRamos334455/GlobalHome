@@ -19,7 +19,9 @@ identified by carima
 quota 1024m on users;
 
 prompt CREANDO DIRECTORIO MULTIMEDIA...
-create directory multimedia as '/home/oracle/multimedia';
+!cp -r multimedia /tmp/
+!chmod 777 /tmp/multimedia
+create directory multimedia as '/tmp/multimedia';
 grant read, write on directory multimedia to kgr_proy_admin;
 grant read, write on directory multimedia to kgr_proy_invitado;
 

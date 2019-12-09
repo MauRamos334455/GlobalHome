@@ -4,8 +4,6 @@
     --Ramos Villaseñor César Mauricio
 --@Fecha creación: 07/12/2019
 --@Descripción: Creación de sinónimos
-prompt CONECTANDO...
-connect kgr_proy_admin/carima 
 
 Prompt Creando sinónimos para el usuario kgr_proy_admin
 create or replace public synonym servicios for kgr_proy_admin.vivienda_servicio;
@@ -25,4 +23,4 @@ create or replace synonym kgr_proy_invitado.renta     for kgr_proy_admin.viviend
 create or replace synonym kgr_proy_invitado.vacacion  for kgr_proy_admin.vivienda_vacacion;
 
 prompt ¡LISTO!
-disconnect;
+

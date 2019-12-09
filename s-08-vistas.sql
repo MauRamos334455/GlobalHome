@@ -5,9 +5,6 @@
 --@Fecha creación: 07/12/2019
 --@Descripción: Creación de vistas
 
-prompt CONECTANDO...
-connect kgr_proy_admin/carima;
-
 --Muestra todas las tarjetas de cŕedito junto con los datos su propietario
 prompt PRIMERA VISTA...
 create or replace view datos_usaurio(

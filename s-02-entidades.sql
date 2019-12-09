@@ -5,9 +5,6 @@
 --@Descripción: Creación de tablas (DDL)
 --de la base de datos para el proyecto GlobalHome.
 
-prompt CONECTANDO...
-connect kgr_proy_admin/carima;
-
 prompt TABLA USUARIOS
 create table usuario(
     usuario_id number(10,0) default usuario_seq.nextval
@@ -293,4 +290,4 @@ create table mensualidad(
 );
 
 prompt ¡LISTO!
-disconnect;
+

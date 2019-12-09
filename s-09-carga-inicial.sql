@@ -5,9 +5,6 @@
 --@Descripción: Creación de datos (DML)
 --de la base de datos para el proyecto GlobalHome.
 
-prompt CONECTANDO...
-connect kgr_proy_admin/carima;
-
 prompt DATOS DE USUARIOS...
 insert into usuario (usuario_id, email, nombre_usuario, nombre, apellido_paterno, apellido_materno, contrasenia) values (usuario_seq.nextval, 'rjeppensen0@free.fr', 'rjeppensen0', 'Ripley', 'Kinder', 'Jeppensen', '4Vlskn19T');
 insert into usuario (usuario_id, email, nombre_usuario, nombre, apellido_paterno, apellido_materno, contrasenia) values (usuario_seq.nextval, 'gswains1@businessweek.com', 'gswains1', 'Germana', 'Sey', 'Swains', 'EJfxxq09');
@@ -178,4 +175,3 @@ insert into mensualidad (transaccion_id, numero_pago, fecha_pago, importe, evide
 prompt DATOS INTERESADO
 insert into interesado (usuario_id, nombre_usuario, email, vivienda_id, longitud, latitud, direccion, es_renta, es_vacacion, es_venta) values (5,'sbienvenu4','sbienvenu4@amazon.co.jp',2,23.5966577, -6.1306709, '51 Sutherland Drive',0,1,0);
 
-disconnect;
