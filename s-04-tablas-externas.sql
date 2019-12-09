@@ -5,9 +5,6 @@
 --@Descripción: Creación de tablas (DDL) externas
 --de la base de datos para el proyecto GlobalHome.
 
-prompt CONECTANDO... 
-connect kgr_proy_admin/carima;
-
 --ESTA TABLA CONTIENE AL ARCHIVO VIVIENDAS_OBSOLETAS.txt
 --TODAS ESTAS VIVIENDAS FUERON ELIMINADAS DEL SISTEMA POR ALGUNA RAZON
 create table vivienda_obsoleta (
@@ -37,4 +34,3 @@ organization external (
 reject limit unlimited;
 
 prompt ¡LISTO!
-disconnect

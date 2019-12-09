@@ -5,9 +5,6 @@
 --@Fecha creación: 07/12/2019
 --@Descripción: Creación de indices
 
-prompt Ingresando como kgr_proy_admin
-connect kgr_proy_admin/carima 
-
 PROMPT INDICES NO UNIQUE...
 create index trans_clave_ix   on TRANSACCION(CLAVE_INTERBANCARIA);
 create index tarj_numero_ix   on TARJETA_CREDITO(NUMERO_TARJETA);
@@ -40,4 +37,4 @@ create index vacacion_mesini_ix   on VIVIENDA_VACACION(extract(MONTH from FECHA_
 create index vacacion_diaini_ix   on VIVIENDA_VACACION(extract(DAY from FECHA_INICIO));
 
 prompt ¡LISTO!
-disconnect;
+

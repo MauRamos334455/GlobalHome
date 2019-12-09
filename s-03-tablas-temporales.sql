@@ -5,9 +5,6 @@
 --@Descripción: Creación de tablas (DDL) temporales
 --de la base de datos para el proyecto GlobalHome.
 
-prompt CONECTANDO...
-connect kgr_proy_admin/carima;
-
 --Tabla que simula una especie de carrito de compras
 prompt TABLA INTERESADO
 create global temporary table interesado(
@@ -21,7 +18,6 @@ create global temporary table interesado(
     es_renta number(1,0) not null,
     es_vacacion number(1,0) not null,
     es_venta number(1,0) not null
-) on commit delete rows;
+) on commit preserve rows;
 
 prompt ¡LISTO!
-disconnect;
