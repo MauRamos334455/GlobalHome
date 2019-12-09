@@ -6,9 +6,6 @@
 --privilegios a los usuarios de la base de
 --datos para el proyecto GlobalHome.
 
-prompt INGRESANDO COMO SYSDBA...
-connect sys as sysdba
-
 prompt CREANDO USUARIOS...
 create user kgr_proy_invitado
 identified by carima
@@ -41,4 +38,4 @@ grant rol_admin to kgr_proy_admin;
 grant rol_invitado to kgr_proy_invitado;
 
 prompt ¡LISTO!
-disconnect;
+
