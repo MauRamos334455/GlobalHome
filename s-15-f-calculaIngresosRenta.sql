@@ -60,3 +60,5 @@ begin
 end;
 /
 show errors
+
+disconnect;

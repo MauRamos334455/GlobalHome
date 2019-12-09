@@ -65,3 +65,5 @@ create or replace trigger trg_valida_targeta_alq
   end trg_valida_targeta_alq;
   /
   show errors
+
+disconnect;

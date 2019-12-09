@@ -34,3 +34,5 @@ begin
 end calculaIngresosAlquiler;
 /
 show errors
+
+disconnect;
