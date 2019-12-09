@@ -9,7 +9,6 @@
 
 prompt CONECTANDO...
 connect kgr_proy_admin/carima;
-
 create or replace trigger trg_status_vivienda
   after insert or update of status_vivienda_id on vivienda
   for each row
